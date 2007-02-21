@@ -1,0 +1,10 @@
+VirtualBox OSE Windows Guest Additions Installer
+
+The VirtualBox OSE does not provide an installer for the Windows Guest
+Additions.  The goal of this project is to provide a simple packaged version of
+the guest additions so that VirtualBox OSE users do not have to setup a Windows
+build environment just to get the guest additions working.
+
+The VirtualBox OSE source used to build the binaries in 'additions' can always
+be found in 'src'.  The only tool required to build the installer is NSIS
+(http://nsis.sf.net).
