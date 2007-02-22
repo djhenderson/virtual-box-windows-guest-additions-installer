@@ -1,4 +1,4 @@
-- Make the installer actually install/uninstall the drivers
+- Make the installer actually uninstall the drivers
 - Make the installer check that the user is admin
 - Add some text about distribution being under the terms of the GPL
 - Switch to modern ui
