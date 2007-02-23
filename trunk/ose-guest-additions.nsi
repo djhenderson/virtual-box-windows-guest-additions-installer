@@ -1,17 +1,34 @@
-!define NAME "VirtualBox OSE Windows Guest Additions"
+SetCompressor /SOLID lzma
+
+!include "MUI.nsh"
+
+!define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 1.3.6
 
 Name "${NAME}"
-InstallDir "$PROGRAMFILES\VirtualBox OSE Guest Additions"
+InstallDir "$PROGRAMFILES\${NAME}"
 OutFile VirtualBox_OSE_GuestAdditions_${VERSION}.exe
 
 ; TODO: add version information
-; TODO: switch to modern ui
+
+!define MUI_ICON "graphics\orange-install.ico"
+!define MUI_UNICON "graphics\orange-uninstall.ico"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP "graphics\orange-header.bmp"
+!define MUI_HEADERIMAGE_UNBITMAP "graphics\orange-header-uninstall.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "graphics\orange.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "graphics\orange-uninstall.bmp"
 
 ; TODO: add page about distribution under the GPL
-Page instfiles
-UninstPage uninstConfirm
-UninstPage instfiles
+!insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
+
+!insertmacro MUI_LANGUAGE "English"
 
 !include "driver-helpers.nsh"
 
@@ -46,6 +63,9 @@ Section "Install Files"
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
         "InstallLocation" $INSTDIR
+    WriteRegStr HKLM \
+        "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
+        "DisplayIcon" "$INSTDIR\VBoxService.exe,0"
 SectionEnd
 
 Section "Install Drivers"
@@ -67,7 +87,6 @@ Section "Install Drivers"
     DetailPrint "Installing VirtualBox Mouse Driver"
     Call InstallDriver 
 
-    ; FIXME: find out why the reboot prompt does not appear
     ; really need to reboot to get everything working
     SetRebootFlag true
 SectionEnd
