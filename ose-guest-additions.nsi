@@ -4,12 +4,24 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 1.3.6
+!define INSTALLER_BUILD 0
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
-OutFile VirtualBox_OSE_GuestAdditions_${VERSION}.exe
+OutFile VirtualBox_OSE_GuestAdditions-${VERSION}-${INSTALLER_BUILD}.exe
 
 ; TODO: add version information
+
+Function OnGuiStart
+    ; TODO: check windows version
+
+    UserInfo::GetAccountType
+    Pop $0
+    StrCmp $0 "Admin" +3 0
+        MessageBox MB_OK "The VirtualBox OSE Guest Additions must be installed by a member of the Administrators group."
+        Quit
+
+FunctionEnd
 
 !define MUI_ICON "graphics\orange-install.ico"
 !define MUI_UNICON "graphics\orange-uninstall.ico"
@@ -27,6 +39,8 @@ OutFile VirtualBox_OSE_GuestAdditions_${VERSION}.exe
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
+
+!define MUI_CUSTOMFUNCTION_GUIINIT OnGuiStart
 
 !insertmacro MUI_LANGUAGE "English"
 
