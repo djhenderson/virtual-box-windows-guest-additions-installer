@@ -1,3 +1,25 @@
+; ose-guest-additions.nsi
+;
+; Copyright 2007 Byron Clark
+; 
+; This file is part of the VirtualBox OSE Guest Additions Installer.
+;
+; The VirtualBox OSE Guest Additions Installer is free software; you can
+; redistribute it and/or modify it under the terms of the GNU General Public
+; License as published by the Free Software Foundation; either version 2 of 
+; the License, or (at your option) any later version.
+;
+; The VirtualBox OSE Guest Additions Installer is distributed in the hope
+; that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with the VirtualBox OSE Guest Additions Installer; if not, write to 
+; the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, 
+; Boston, MA  02110-1301  USA
+; 
+
 SetCompressor /SOLID lzma
 
 !include "MUI.nsh"
@@ -23,13 +45,13 @@ Function OnGuiStart
 
 FunctionEnd
 
-!define MUI_ICON "graphics\orange-install.ico"
-!define MUI_UNICON "graphics\orange-uninstall.ico"
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
+!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "graphics\orange-header.bmp"
-!define MUI_HEADERIMAGE_UNBITMAP "graphics\orange-header-uninstall.bmp"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "graphics\orange.bmp"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "graphics\orange-uninstall.bmp"
+!define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\orange.bmp"
+!define MUI_HEADERIMAGE_UNBITMAP "${NSISDIR}\Contrib\Graphics\Header\orange-uninstall.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange-uninstall.bmp"
 
 ; TODO: add page about distribution under the GPL
 !insertmacro MUI_PAGE_WELCOME
