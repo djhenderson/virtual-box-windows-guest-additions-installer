@@ -31,18 +31,20 @@ SetCompressor /SOLID lzma
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
 OutFile VirtualBox_OSE_GuestAdditions-${VERSION}-${INSTALLER_BUILD}.exe
+RequestExecutionLevel admin
 
 ; TODO: add version information
 
 Function OnGuiStart
     ; TODO: check windows version
+    ; need to find license information on the get windows version
+    ; script available at http://nsis.sourceforge.net/Get_Windows_version
 
     UserInfo::GetAccountType
     Pop $0
     StrCmp $0 "Admin" +3 0
         MessageBox MB_OK "The VirtualBox OSE Guest Additions must be installed by a member of the Administrators group."
         Quit
-
 FunctionEnd
 
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
