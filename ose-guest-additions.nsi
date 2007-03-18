@@ -26,7 +26,7 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 1.3.8
-!define INSTALLER_BUILD 0
+!define INSTALLER_BUILD 1
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
