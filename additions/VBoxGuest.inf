@@ -39,7 +39,6 @@ DriverVer=08/21/2006,5.00.2072
 
 [DestinationDirs]
 DefaultDestDir = 12 ; drivers
-VBox_CoInstaller_CopyFiles = 11 ; system32
 VBoxService_CopyFiles = 11 ; system32
 
 [Manufacturer]
@@ -72,16 +71,6 @@ ServiceBinary  = %12%\VBoxGuest.sys
 
 [VBoxService_Add_Reg]
 HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Run, VBoxService, 0x00000000, %11%\VBoxService.exe
-
-[VBoxGuest_Install.CoInstallers]
-AddReg = VBoxGuest_Install_CoInstallers_reg
-CopyFiles = VBox_CoInstaller_CopyFiles
-
-[VBox_CoInstaller_CopyFiles]
-vbcoinst.dll
-
-[VBoxGuest_Install_CoInstallers_reg]
-HKR,,CoInstallers32,0x00010000,"vbcoinst.dll,VBoxCoInstaller"
 
 [Strings]
 INNOTEK_MFG = "innotek GmbH"
