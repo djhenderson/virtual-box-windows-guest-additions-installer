@@ -1,7 +1,7 @@
 ;
 ; INF file for installing the VirtualBox Windows guest driver
 ;
-; Copyright (C) 2006 InnoTek Systemberatung GmbH
+; Copyright (C) 2006-2007 innotek GmbH
 ;
 ; This file is part of VirtualBox Open Source Edition (OSE), as
 ; available from http://www.virtualbox.org. This file is free software;
@@ -22,10 +22,24 @@ Class=System
 ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
 Provider=%INNOTEK%
 LayoutFile=layout.inf
-DriverVer=12/31/2004,5.00.2072
+DriverVer=08/21/2006,5.00.2072
+;cat CatalogFile=VBoxGuest.cat
+
+;cat [SourceDisksNames]
+;cat 1 = %VBoxGuest.MediaDesc%
+;cat 2 = %VBoxControl.MediaDesc%
+;cat 3 = %VBoxService.MediaDesc%
+;cat 4 = %vbcoinst.MediaDesc%
+;cat
+;cat [SourceDisksFiles]
+;cat VBoxGuest.sys = 1
+;cat VBoxControl.exe = 2
+;cat VBoxService.exe = 3
+;cat vbcoinst.dll = 4
 
 [DestinationDirs]
 DefaultDestDir = 12 ; drivers
+VBox_CoInstaller_CopyFiles = 11 ; system32
 VBoxService_CopyFiles = 11 ; system32
 
 [Manufacturer]
@@ -59,9 +73,25 @@ ServiceBinary  = %12%\VBoxGuest.sys
 [VBoxService_Add_Reg]
 HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Run, VBoxService, 0x00000000, %11%\VBoxService.exe
 
+[VBoxGuest_Install.CoInstallers]
+AddReg = VBoxGuest_Install_CoInstallers_reg
+CopyFiles = VBox_CoInstaller_CopyFiles
+
+[VBox_CoInstaller_CopyFiles]
+vbcoinst.dll
+
+[VBoxGuest_Install_CoInstallers_reg]
+HKR,,CoInstallers32,0x00010000,"vbcoinst.dll,VBoxCoInstaller"
+
 [Strings]
-INNOTEK_MFG = "InnoTek Systemberatung GmbH"
-INNOTEK = "InnoTek Systemberatung GmbH"
+INNOTEK_MFG = "innotek GmbH"
+INNOTEK = "innotek GmbH"
 VBoxGuest.DeviceDesc = "VirtualBox Device"
 VBoxGuest_svcdesc = "VirtualBox Guest Driver"
 VBoxService_svcdesc = "VirtualBox Guest Service"
+
+;cat VBoxGuest.MediaDesc   = "VirtualBox Guest Mouse Driver Installation Media"
+;cat VBoxControl.MediaDesc = "VirtualBox Guest Mouse Driver Installation Media"
+;cat VBoxService.MediaDesc = "VirtualBox Guest Mouse Driver Installation Media"
+;cat vbcoinst.MediaDesc    = "VirtualBox Guest Mouse Driver Installation Media"
+
