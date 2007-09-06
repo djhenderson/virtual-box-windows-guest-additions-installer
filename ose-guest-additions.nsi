@@ -26,7 +26,7 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 1.5.0
-!define INSTALLER_BUILD 0
+!define INSTALLER_BUILD 1
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
@@ -88,11 +88,14 @@ Section "Install Files"
     File additions\VBoxMouse.inf
     File additions\VBoxMouse.sys
 
+    ; global hook
+    SetOutPath $SYSDIR
+    File additions\VBoxHook.dll
+    SetOutPath $INSTDIR
+    File additions\VBoxHook.dll
+
     ; GINA replacement
     File additions\VBoxGINA.dll
-
-    ; global hook
-    File additions\VBoxHook.dll
 
     ; OpenGL driver
     File additions\VBoxOGL.dll
@@ -156,12 +159,14 @@ Section "un.Install Files"
     Delete $INSTDIR\VBoxMouse.inf
     Delete $INSTDIR\VBoxMouse.sys
 
+    ; global hook
+    Delete $SYSDIR\VBoxHook.dll
+    Delete $INSTDIR\VBoxHook.dll
+
+
     ; TODO: remove the registry key if the VBoxGINA is in use
     ; GINA replacement
     Delete $INSTDIR\VBoxGINA.dll
-
-    ; global hook
-    Delete $INSTDIR\VBoxHook.dll
 
     ; OpenGL driver
     Delete $INSTDIR\VBoxOGL.dll    
