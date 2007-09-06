@@ -25,7 +25,7 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 1.4.0
+!define VERSION 1.5.0
 !define INSTALLER_BUILD 0
 
 Name "${NAME}"
@@ -91,6 +91,12 @@ Section "Install Files"
     ; GINA replacement
     File additions\VBoxGINA.dll
 
+    ; global hook
+    File additions\VBoxHook.dll
+
+    ; OpenGL driver
+    File additions\VBoxOGL.dll
+
     WriteUninstaller $INSTDIR\uninstall.exe
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
@@ -153,6 +159,12 @@ Section "un.Install Files"
     ; TODO: remove the registry key if the VBoxGINA is in use
     ; GINA replacement
     Delete $INSTDIR\VBoxGINA.dll
+
+    ; global hook
+    Delete $INSTDIR\VBoxHook.dll
+
+    ; OpenGL driver
+    Delete $INSTDIR\VBoxOGL.dll    
 SectionEnd
 
 Section "Uninstall"
