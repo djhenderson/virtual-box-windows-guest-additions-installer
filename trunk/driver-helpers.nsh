@@ -1,6 +1,6 @@
 ; driver-helpers.nsh
 ;
-; Copyright 2007 Byron Clark
+; Copyright 2007-2008 Byron Clark
 ; 
 ; This file is part of the VirtualBox OSE Guest Additions Installer.
 ;
