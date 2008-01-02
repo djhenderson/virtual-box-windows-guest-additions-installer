@@ -1,6 +1,6 @@
 ; ose-guest-additions.nsi
 ;
-; Copyright 2007 Byron Clark
+; Copyright 2007-2008 Byron Clark
 ; 
 ; This file is part of the VirtualBox OSE Guest Additions Installer.
 ;
@@ -25,8 +25,8 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 1.5.0
-!define INSTALLER_BUILD 1
+!define VERSION 1.5.4
+!define INSTALLER_BUILD 0
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
