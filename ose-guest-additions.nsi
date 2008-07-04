@@ -22,6 +22,7 @@
 
 SetCompressor /SOLID lzma
 
+!addplugindir setup-processing\bin
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
@@ -39,13 +40,37 @@ Function OnGuiStart
     ; TODO: check windows version
     ; need to find license information on the get windows version
     ; script available at http://nsis.sourceforge.net/Get_Windows_version
-    ; TODO: stop VBoxService.exe or VBoxTray.exe
 
     UserInfo::GetAccountType
     Pop $0
     StrCmp $0 "Admin" +3 0
         MessageBox MB_OK "The VirtualBox OSE Guest Additions must be installed by a member of the Administrators group."
         Quit
+FunctionEnd
+
+Function KillRunningProcess
+    ; grab arguments
+    Pop $R1 ; process name
+    
+    Processes::FindProcess $R1
+    StrCmp $R0 "1" krp_do_kill krp_success
+
+    krp_do_kill:
+    Processes::KillProcess $R1
+    StrCmp $R0 "1" krp_success krp_kill_failed
+
+    krp_kill_failed:
+    Process::FindProcess $R1
+    StrCmp $R0 "1" krp_wont_die krp_success
+
+    krp_wont_die:
+    push 1
+    Goto krp_return
+
+    krp_success:
+    push 0
+
+    krp_return:
 FunctionEnd
 
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
@@ -71,6 +96,25 @@ FunctionEnd
 !include "driver-helpers.nsh"
 
 Section "Install Files"
+    ; Make sure the tray application is stopped
+    DetailPrint "Stopping VBoxService.exe"
+    Push "VBoxService"
+    Call KillRunningProcess
+    Pop $R0
+    StrCmp $R0 0 service_kill_success service_kill_failure
+    service_kill_failure:
+    Abort "Unable to stop VBoxService.exe"
+    service_kill_success:
+
+    DetailPrint "Stopping VBoxTray.exe"
+    Push "VBoxTray"
+    Call KillRunningProcess
+    Pop $R0
+    StrCmp $R0 0 tray_kill_success tray_kill_failure
+    tray_kill_failure:
+    Abort "Unable to stop VBoxTray.exe"
+    tray_kill_success:
+
     SetOutPath $INSTDIR
     
     ; guest driver
