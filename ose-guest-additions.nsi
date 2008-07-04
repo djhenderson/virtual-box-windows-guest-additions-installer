@@ -25,7 +25,7 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 1.5.4
+!define VERSION 1.6.2
 !define INSTALLER_BUILD 0
 
 Name "${NAME}"
@@ -39,6 +39,7 @@ Function OnGuiStart
     ; TODO: check windows version
     ; need to find license information on the get windows version
     ; script available at http://nsis.sourceforge.net/Get_Windows_version
+    ; TODO: stop VBoxService.exe or VBoxTray.exe
 
     UserInfo::GetAccountType
     Pop $0
@@ -55,7 +56,6 @@ FunctionEnd
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange-uninstall.bmp"
 
-; TODO: add page about distribution under the GPL
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
@@ -76,7 +76,7 @@ Section "Install Files"
     ; guest driver
     File additions\VBoxGuest.inf
     File additions\VBoxGuest.sys
-    File additions\VBoxService.exe
+    File additions\VBoxTray.exe
     File additions\VBoxControl.exe
 
     ; video driver
@@ -112,7 +112,7 @@ Section "Install Files"
         "InstallLocation" $INSTDIR
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
-        "DisplayIcon" "$INSTDIR\VBoxService.exe,0"
+        "DisplayIcon" "$INSTDIR\VBoxTray.exe,0"
 SectionEnd
 
 Section "Install Drivers"
@@ -147,7 +147,7 @@ Section "un.Install Files"
     ; guest driver
     Delete $INSTDIR\VBoxGuest.inf
     Delete $INSTDIR\VBoxGuest.sys
-    Delete $INSTDIR\VBoxService.exe
+    Delete $INSTDIR\VBoxTray.exe
     Delete $INSTDIR\VBoxControl.exe
 
     ; video driver
