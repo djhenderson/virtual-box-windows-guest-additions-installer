@@ -22,12 +22,12 @@
 
 SetCompressor /SOLID lzma
 
-!addplugindir setup-processing\bin
+!addplugindir setup-processes\bin
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 1.6.2
-!define INSTALLER_BUILD 0
+!define INSTALLER_BUILD 1
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
@@ -52,15 +52,15 @@ Function KillRunningProcess
     ; grab arguments
     Pop $R1 ; process name
     
-    Processes::FindProcess $R1
+    Processes::FindProcess "$R1"
     StrCmp $R0 "1" krp_do_kill krp_success
 
     krp_do_kill:
-    Processes::KillProcess $R1
+    Processes::KillProcess "$R1"
     StrCmp $R0 "1" krp_success krp_kill_failed
 
     krp_kill_failed:
-    Process::FindProcess $R1
+    Processes::FindProcess "$R1"
     StrCmp $R0 "1" krp_wont_die krp_success
 
     krp_wont_die:
@@ -68,6 +68,9 @@ Function KillRunningProcess
     Goto krp_return
 
     krp_success:
+    ; Make sure the process has exited
+    Processes::FindProcess "$R1"
+    StrCmp $R0 "1" krp_success
     push 0
 
     krp_return:
