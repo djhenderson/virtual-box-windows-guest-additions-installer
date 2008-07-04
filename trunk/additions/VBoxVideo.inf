@@ -1,15 +1,20 @@
 ;
 ; VirtualBox Video miniport driver
 ;
-;  Copyright (C) 2006-2007 innotek GmbH
-; 
-;  This file is part of VirtualBox Open Source Edition (OSE), as
-;  available from http://www.virtualbox.org. This file is free software;
-;  you can redistribute it and/or modify it under the terms of the GNU
-;  General Public License as published by the Free Software Foundation,
-;  in version 2 as it comes in the "COPYING" file of the VirtualBox OSE
-;  distribution. VirtualBox OSE is distributed in the hope that it will
-;  be useful, but WITHOUT ANY WARRANTY of any kind.
+; Copyright (C) 2006-2007 Sun Microsystems, Inc.
+;
+; This file is part of VirtualBox Open Source Edition (OSE), as
+; available from http://www.virtualbox.org. This file is free software;
+; you can redistribute it and/or modify it under the terms of the GNU
+; General Public License (GPL) as published by the Free Software
+; Foundation, in version 2 as it comes in the "COPYING" file of the
+; VirtualBox OSE distribution. VirtualBox OSE is distributed in the
+; hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
+;
+; Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa
+; Clara, CA 95054 USA or visit http://www.sun.com if you need
+; additional information or have any questions.
+;
 
 [Version]
 Signature="$WINDOWS NT$"
@@ -69,11 +74,11 @@ HKR,, VgaCompatible, %REG_DWORD%, 0
 
 [SourceDisksNames]
 1 = %VBoxVideo.Disk%,,,""
-;cat 2 = %VBoxVideo.Disk%,,,""
+2 = %VBoxVideo.Disk%,,,""
 
 [SourceDisksFiles]
-;cat VBoxVideo.sys = 1
-;cat VBoxDisp.dll = 2
+VBoxVideo.sys = 1
+VBoxDisp.dll = 2
 
 [Strings]
 REG_SZ = 0x00000000
@@ -82,6 +87,6 @@ REG_EXPAND_SZ = 0x00020000
 REG_BINARY = 0x00000001
 REG_DWORD = 0x00010001
 
-Provider = "innotek GmbH"
+Provider = "Sun Microsystems, Inc."
 VBoxVideo.Disk = "VirtualBox Video Driver Disk"
 VBoxVideo.SvcDesc = "VirtualBox Graphics Adapter"
