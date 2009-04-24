@@ -26,8 +26,9 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 1.6.6
+!define VERSION 2.2.0
 !define INSTALLER_BUILD 0
+!define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
@@ -146,11 +147,20 @@ Section "Install Files"
 
     ; OpenGL driver
     File additions\VBoxOGL.dll
+	File additions\VBoxOGLarrayspu.dll
+	File additions\VBoxOGLcrutil.dll
+	File additions\VBoxOGLerrorspu.dll
+	File additions\VBoxOGLfeedbackspu.dll
+	File additions\VBoxOGLpackspu.dll
+	File additions\VBoxOGLpassthroughspu.dll
+	
+	; TODO VBoxService!
+	File additions\VBoxService.exe
 
     WriteUninstaller $INSTDIR\uninstall.exe
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
-        "DisplayName" "${NAME}"
+        "DisplayName" "${NAMEVER}"
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
         "UninstallString" "$INSTDIR\uninstall.exe"
@@ -181,6 +191,8 @@ Section "Install Drivers"
     DetailPrint "Installing VirtualBox Mouse Driver"
     Call InstallDriver 
 
+	;  TODO VBoxService.exe can be installed via /i - yet, startup manually ... is that correct?
+	
     ; really need to reboot to get everything working
     SetRebootFlag true
 SectionEnd
@@ -196,6 +208,7 @@ Section "un.Install Files"
     Delete $INSTDIR\VBoxGuest.sys
     Delete $INSTDIR\VBoxTray.exe
     Delete $INSTDIR\VBoxControl.exe
+    Delete $INSTDIR\VBoxService.exe
 
     ; video driver
     Delete $INSTDIR\VBoxVideo.inf
@@ -217,6 +230,12 @@ Section "un.Install Files"
 
     ; OpenGL driver
     Delete $INSTDIR\VBoxOGL.dll    
+	Delete $INSTDIR\VBoxOGLarrayspu.dll
+	Delete $INSTDIR\VBoxOGLcrutil.dll
+	Delete $INSTDIR\VBoxOGLerrorspu.dll
+	Delete $INSTDIR\VBoxOGLfeedbackspu.dll
+	Delete $INSTDIR\VBoxOGLpackspu.dll
+	Delete $INSTDIR\VBoxOGLpassthroughspu.dll
 SectionEnd
 
 Section "Uninstall"
