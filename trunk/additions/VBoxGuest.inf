@@ -15,6 +15,7 @@
 ; Clara, CA 95054 USA or visit http://www.sun.com if you need
 ; additional information or have any questions.
 ;
+; cf http://vbox.innotek.de/pipermail/vbox-dev/2007-March/000109.html about removing vbcoinst.dll
 
 [Version]
 Signature="$WINDOWS NT$"
@@ -22,8 +23,7 @@ Class=System
 ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
 Provider=%SUN%
 LayoutFile=layout.inf
-DriverVer=08/21/2006,5.00.2072
-;cat CatalogFile=VBoxGuest.cat
+DriverVer = 04/14/2009,2.2.0
 
 [SourceDisksNames]
 1 = %VBoxGuest.MediaDesc%
@@ -37,10 +37,11 @@ VBoxTray.exe = 3
 
 [DestinationDirs]
 DefaultDestDir = 12 ; drivers
+VBox_CoInstaller_CopyFiles = 11 ; system32
 VBoxTray_CopyFiles = 11 ; system32
 
 [Manufacturer]
-%SUN_MFG% = VBoxGuest
+%SUN%=VBoxGuest
 
 [VBoxGuest]
 %VBoxGuest.DeviceDesc%=VBoxGuest_Install,PCI\VEN_80ee&DEV_cafe
@@ -63,15 +64,19 @@ DelService = VBoxTray, 0x00000004
 [VBoxGuest_ServiceInstallSection]
 DisplayName    = %VBoxGuest_svcdesc%
 ServiceType    = 0x00000001 ; kernel driver
-StartType      = 0x00000003 ; demand start
+StartType      = 0x00000000 ; boot start
 ErrorControl   = 0x00000001 ; normal error handling
+LoadOrderGroup = Base
 ServiceBinary  = %12%\VBoxGuest.sys
 
 [VBoxTray_Add_Reg]
 HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Run, VBoxTray, 0x00000000, %11%\VBoxTray.exe
 
+
+[ClassInstall32]
+; This should fix the error 0xe0000101 (The required section was not found in the INF).
+
 [Strings]
-SUN_MFG = "Sun Microsystems, Inc."
 SUN = "Sun Microsystems, Inc."
 VBoxGuest.DeviceDesc = "VirtualBox Device"
 VBoxGuest_svcdesc = "VirtualBox Guest Driver"
