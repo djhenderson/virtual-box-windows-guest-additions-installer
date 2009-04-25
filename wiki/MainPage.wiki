@@ -1,0 +1,31 @@
+#summary Main Page: virtual-box-windows-guest-additions-installer
+#labels Featured
+
+= VirtualBox Guest Additions for Windows OSE =
+
+Binary/Compiled version of the VirtualBox Guest Additions for Windows, Open Source Edition (OSE) version. Including installer.
+
+
+= Details =
+
+The current version of the installer, VirtualBox_OSE_GuestAdditions-2.2.0-1.exe, is based on the 2.2.0 version of VirtualBox OSE. It has been compiled with MS Visual Studio 2005 (aka Visual C++ 8.0).
+
+It should be possible to install the additions on any VBox guest system running Windows 2000, XP, or later. Provided are the following:
+
+ * Graphics driver
+ * Mouse driver
+ * OpenGL driver
+ * VirtualBox.exe and .sys Guest system drivers
+
+The installation has not been yet thoroughly tested, only on Windows XP.
+Graphics performance, especially OpenGL, appears to be less than the PUEL version provided by SUN. 
+
+Some issues are still open:
+ * Clean uninstall of the drivers
+ * Checking for VBox guest
+ * Disallow installing when SUN xVM Guest Additions are (still) installed.
+
+Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial).
+
+= License =
+GNU General Public License (GPL) v2
