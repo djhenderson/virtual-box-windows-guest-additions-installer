@@ -23,22 +23,25 @@ Class=System
 ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
 Provider=%SUN%
 LayoutFile=layout.inf
-DriverVer = 04/14/2009,2.2.0
+DriverVer = 04/25/2009,2.2.0-1
 
 [SourceDisksNames]
 1 = %VBoxGuest.MediaDesc%
 2 = %VBoxControl.MediaDesc%
 3 = %VBoxTray.MediaDesc%
+4 = %VBoxService.MediaDesc%
 
 [SourceDisksFiles]
 VBoxGuest.sys = 1
 VBoxControl.exe = 2
 VBoxTray.exe = 3
+VBoxService.exe = 4
 
 [DestinationDirs]
 DefaultDestDir = 12 ; drivers
 VBox_CoInstaller_CopyFiles = 11 ; system32
 VBoxTray_CopyFiles = 11 ; system32
+VBoxService_CopyFiles = 11 ; system32
 
 [Manufacturer]
 %SUN%=VBoxGuest
@@ -47,7 +50,7 @@ VBoxTray_CopyFiles = 11 ; system32
 %VBoxGuest.DeviceDesc%=VBoxGuest_Install,PCI\VEN_80ee&DEV_cafe
 
 [VBoxGuest_Install]
-CopyFiles = VBoxGuest_CopyFiles, VBoxTray_CopyFiles
+CopyFiles = VBoxGuest_CopyFiles, VBoxTray_CopyFiles, VBoxService_CopyFiles
 AddReg = VBoxTray_Add_Reg
 
 [VBoxGuest_CopyFiles]
@@ -57,9 +60,15 @@ VBoxGuest.sys
 VBoxTray.exe
 VBoxControl.exe
 
+[VBoxService_CopyFiles]
+VBoxService.exe
+
+
 [VBoxGuest_Install.Services]
-AddService = VBoxGuest, 0x00000002, VBoxGuest_ServiceInstallSection
-DelService = VBoxTray, 0x00000004
+AddService = VBoxGuest,   0x00000002, VBoxGuest_ServiceInstallSection
+AddService = VBoxService, 0x00000000, VBoxService_ServiceInstallSection
+DelService = VBoxTray,    0x00000004
+
 
 [VBoxGuest_ServiceInstallSection]
 DisplayName    = %VBoxGuest_svcdesc%
@@ -68,6 +77,15 @@ StartType      = 0x00000000 ; boot start
 ErrorControl   = 0x00000001 ; normal error handling
 LoadOrderGroup = Base
 ServiceBinary  = %12%\VBoxGuest.sys
+
+[VBoxService_ServiceInstallSection]
+DisplayName    = %VBoxService_svcdesc%
+ServiceType    = 0x00000010 ; SERVICE_WIN32_OWN_PROCESS
+StartType      = 0x00000002 ; automatic start SERVICE_AUTO_START
+ErrorControl   = 0x00000001 ; normal error handling
+ServiceBinary  = %11%\VBoxService.exe
+LoadOrderGroup = Base
+
 
 [VBoxTray_Add_Reg]
 HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Run, VBoxTray, 0x00000000, %11%\VBoxTray.exe
@@ -81,4 +99,5 @@ SUN = "Sun Microsystems, Inc."
 VBoxGuest.DeviceDesc = "VirtualBox Device"
 VBoxGuest_svcdesc = "VirtualBox Guest Driver"
 VBoxTray_svcdesc = "VirtualBox Guest Tray"
+VBoxService_svcdesc = "VirtualBox Guest Service"
 

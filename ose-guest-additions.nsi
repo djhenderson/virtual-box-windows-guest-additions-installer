@@ -20,6 +20,13 @@
 ; Boston, MA  02110-1301  USA
 ; 
 
+; TODO
+; - stop VBoxService
+; - uninstall services
+; - fail if PUEL is installed.
+;  Sun xVM VirtualBox Guest Additions 2.x.y
+;  HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Sun xVM VirtualBox Guest Additions
+
 SetCompressor /SOLID lzma
 
 !addplugindir setup-processes\bin
@@ -27,7 +34,7 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 2.2.0
-!define INSTALLER_BUILD 0
+!define INSTALLER_BUILD 1
 !define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
 
 Name "${NAME}"
@@ -100,7 +107,8 @@ FunctionEnd
 !include "driver-helpers.nsh"
 
 Section "Install Files"
-    ; Make sure the tray application is stopped
+    ; Make sure the service and tray application is stopped
+	; TODO can a service be stopped this way? NO
     DetailPrint "Stopping VBoxService.exe"
     Push "VBoxService"
     Call KillRunningProcess
@@ -126,6 +134,7 @@ Section "Install Files"
     File additions\VBoxGuest.sys
     File additions\VBoxTray.exe
     File additions\VBoxControl.exe
+	File additions\VBoxService.exe
 
     ; video driver
     File additions\VBoxVideo.inf
@@ -146,6 +155,7 @@ Section "Install Files"
     File additions\VBoxGINA.dll
 
     ; OpenGL driver
+    SetOutPath $SYSDIR
     File additions\VBoxOGL.dll
 	File additions\VBoxOGLarrayspu.dll
 	File additions\VBoxOGLcrutil.dll
@@ -154,9 +164,8 @@ Section "Install Files"
 	File additions\VBoxOGLpackspu.dll
 	File additions\VBoxOGLpassthroughspu.dll
 	
-	; TODO VBoxService!
-	File additions\VBoxService.exe
-
+;    SetOutPath $INSTDIR
+	
     WriteUninstaller $INSTDIR\uninstall.exe
     WriteRegStr HKLM \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\VBoxOSEGuest" \
@@ -173,7 +182,7 @@ Section "Install Files"
 SectionEnd
 
 Section "Install Drivers"
-    ; guest driver
+    ; guest driver, including VBoxService
     Push "PCI\VEN_80ee&DEV_cafe"
     Push $INSTDIR\VBoxGuest.inf
     DetailPrint "Installing VirtualBox Guest Driver"
@@ -190,9 +199,21 @@ Section "Install Drivers"
     Push VBoxMouse.inf
     DetailPrint "Installing VirtualBox Mouse Driver"
     Call InstallDriver 
-
-	;  TODO VBoxService.exe can be installed via /i - yet, startup manually ... is that correct?
 	
+	; OpenGL
+    WriteRegDWORD HKLM \
+        "Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\VBoxOGL" \
+        "Version" 00000002
+    WriteRegDWORD HKLM \
+        "Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\VBoxOGL" \
+        "DriverVersion" 00000001
+    WriteRegDWORD HKLM \
+        "Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\VBoxOGL" \
+        "Flags" 00000001
+    WriteRegStr HKLM \
+        "Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\VBoxOGL" \
+        "Dll" "VBoxOGL.dll"
+		
     ; really need to reboot to get everything working
     SetRebootFlag true
 SectionEnd
