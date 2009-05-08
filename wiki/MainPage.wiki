@@ -31,7 +31,11 @@ Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial
 For windows 7 rc, you need to install the graphics driver manually (2.2.2-0).
 Update graphics driver, Search on computer, "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver.
 
+In seamless mode, the "gadgets" are shown on the host desktop, and can be moved around - alpha blending is missing, though.
+
 According to the discussion group, some people also had success with using the "compatibility assistant" and installing in Vista mode.
+
+
 
 = License =
 GNU General Public License (GPL) v2
