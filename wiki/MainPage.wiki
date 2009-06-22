@@ -35,7 +35,10 @@ In seamless mode, the "gadgets" are shown on the host desktop, and can be moved 
 
 According to the discussion group, some people also had success with using the "compatibility assistant" and installing in Vista mode. I'm not even asked about the unsigned drivers. Maybe driver signing needs to be disabled? Or I should sign the drivers ...
 
-I'm getting the impression that "Program folder virtualization" kicked in, and the version of files found in the C:\Program Files\VirtualBox OSE Guest Additions is *not* the one used by windows ...
+I'm getting the impression that it is possible to install the drivers, but very hard to replace them ... "just" copying the *.exe and *.dll may be the best solution here?
+Updating the graphics driver:
+"Update graphics driver", "Search on computer", "Select from (a?) list of ...", "Disk", "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver (current version).
+
 
 == Compilation ==
 According to Frank Mehnert (Sun), it is possible to compile the additions only with
