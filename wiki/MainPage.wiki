@@ -33,7 +33,7 @@ Update graphics driver, Search on computer, "C:\Program Files\VirtualBox OSE Gue
 
 In seamless mode, the "gadgets" are shown on the host desktop, and can be moved around - alpha blending is missing, though.
 
-According to the discussion group, some people also had success with using the "compatibility assistant" and installing in Vista mode. I'm not even asked about the unsigned drivers. Maybe driver signing needs to be disabled?
+According to the discussion group, some people also had success with using the "compatibility assistant" and installing in Vista mode. I'm not even asked about the unsigned drivers. Maybe driver signing needs to be disabled? Or I should sign the drivers ...
 
 
 
