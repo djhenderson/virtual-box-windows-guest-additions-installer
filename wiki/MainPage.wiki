@@ -35,6 +35,12 @@ In seamless mode, the "gadgets" are shown on the host desktop, and can be moved 
 
 According to the discussion group, some people also had success with using the "compatibility assistant" and installing in Vista mode. I'm not even asked about the unsigned drivers. Maybe driver signing needs to be disabled? Or I should sign the drivers ...
 
+== Compilation ==
+According to Frank Mehnert (Sun), it is possible to compile the additions only with
+kmk VBOX_ONLY_ADDITIONS=1
+Adding BUILD_TARGET=win even allows to compile the windows additions on a linux system, with MSC (Visual Studio) (+ Wine on Linux) installed. Sounds difficult.
+
+Unfortunately, to compile the additions only on windows, you still need the complete VBox "kit" for the configure.vbs to finish correctly. Maybe, this can be helped by creating a reduced configure.vbs that only contains the stuff for the additions.
 
 
 = License =
