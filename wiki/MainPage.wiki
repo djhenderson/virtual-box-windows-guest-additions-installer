@@ -48,11 +48,11 @@ Adding BUILD_TARGET=win even allows to compile the windows additions on a linux 
 Unfortunately, to compile the additions only on windows, you still need the complete VBox "kit" for the configure.vbs to finish correctly. Maybe, this can be helped by creating a reduced configure.vbs that only contains the stuff for the additions.
 
 You need at least:
-* Platform SDK
-* DirectX SDK
-* Driver DK
+ * Platform SDK
+ * DirectX SDK
+ * Driver DK
 You do not need:
-* Qt4
+ * Qt4
 
 
 
