@@ -53,8 +53,7 @@ You need at least:
  * Driver DK
 You do not need:
  * Qt4
-
-
+ * MinGW (incl. gcc and libsdl)
 
 = License =
 GNU General Public License (GPL) v2
