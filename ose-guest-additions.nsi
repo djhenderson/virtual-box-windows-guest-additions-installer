@@ -33,7 +33,7 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 2.2.4
+!define VERSION 3.3.0
 !define INSTALLER_BUILD 0
 !define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
 
@@ -154,7 +154,7 @@ Section "Install Files"
     ; GINA replacement
     File additions\VBoxGINA.dll
 
-    ; OpenGL driver
+    ; OpenGL+D3D driver
     SetOutPath $SYSDIR
     File additions\VBoxOGL.dll
 	File additions\VBoxOGLarrayspu.dll
@@ -163,6 +163,12 @@ Section "Install Files"
 	File additions\VBoxOGLfeedbackspu.dll
 	File additions\VBoxOGLpackspu.dll
 	File additions\VBoxOGLpassthroughspu.dll
+	File additions\d3d8.dll
+	File additions\d3d9.dll
+	File additions\libWine.dll
+	File additions\VBoxD3D8.dll
+	File additions\VBoxD3D9.dll
+	File additions\wined3d.dll
 	
 ;    SetOutPath $INSTDIR
 	
