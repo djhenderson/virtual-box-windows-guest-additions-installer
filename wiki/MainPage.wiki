@@ -27,9 +27,14 @@ Some issues are still open:
 
 Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial).
 
-== VirtualBox 3.0.0 ==
+== VirtualBox 3.0.0 and Direct3D ==
 An installer for the 3.0.0 additions has just been created. 
-Yet, I do not have any information about the D3D support dlls, and how to install them correctly. Thus, only the functionality that was already in 2.2.4 is available in the 3.0.0-0 installer.
+When installed in safe mode, the Direct3D dlls (d3d8.dll and d3d9.dll) in the system32 directory are replaced. VirtualBox then routes the D3D calls to the wine3d implementation which "converts" them to OpenGL, which is already supported in the guest->host setup.
+
+Alternative to the safe mode installation, it may be possible to use
+ takeown /f c:\windows\system32\d3d8.dll
+ takeown /f c:\windows\system32\d3d9.dll
+and copy the two dlls manually from the guest additions installation directory.
 
 == Windows 7 rc ==
 For windows 7 rc, you need to install the graphics driver manually (2.2.2-0).
