@@ -34,7 +34,7 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 3.3.0
-!define INSTALLER_BUILD 0
+!define INSTALLER_BUILD 1
 !define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
 
 Name "${NAME}"
@@ -163,12 +163,19 @@ Section "Install Files"
 	File additions\VBoxOGLfeedbackspu.dll
 	File additions\VBoxOGLpackspu.dll
 	File additions\VBoxOGLpassthroughspu.dll
-	File additions\d3d8.dll
-	File additions\d3d9.dll
 	File additions\libWine.dll
 	File additions\VBoxD3D8.dll
 	File additions\VBoxD3D9.dll
 	File additions\wined3d.dll
+	File additions\d3d8.dll
+	File additions\d3d9.dll
+
+	; replacing the system dlls does not seem to work ... place them in instdir for manual replace
+	; yep, its the dllcache problem.
+	; only works in safe mode ... 
+    SetOutPath $INSTDIR
+	File additions\d3d8.dll
+	File additions\d3d9.dll
 	
 ;    SetOutPath $INSTDIR
 	
