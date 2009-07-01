@@ -27,6 +27,10 @@ Some issues are still open:
 
 Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial).
 
+== VirtualBox 3.0.0 ==
+An installer for the 3.0.0 additions has just been created. 
+Yet, I do not have any information about the D3D support dlls, and how to install them correctly. Thus, only the functionality that was already in 2.2.4 is available in the 3.0.0-0 installer.
+
 == Windows 7 rc ==
 For windows 7 rc, you need to install the graphics driver manually (2.2.2-0).
 Update graphics driver, Search on computer, "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver.
