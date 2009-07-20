@@ -23,7 +23,7 @@ Class=System
 ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
 Provider=%SUN%
 LayoutFile=layout.inf
-DriverVer = 06/30/2009,3.0.0
+DriverVer = 07/11/2009,3.0.2
 
 [SourceDisksNames]
 1 = %VBoxGuest.MediaDesc%
