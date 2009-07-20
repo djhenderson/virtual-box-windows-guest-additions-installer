@@ -28,7 +28,9 @@ Some issues are still open:
 Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial).
 
 == VirtualBox 3.0.0 and Direct3D ==
-Concerning the 3.0.0 GA, please check [http://code.google.com/p/virtual-box-windows-guest-additions-installer/issues/detail?id=18 Issue 18] -- VBoxService does not start.
+
+3.0.0 has a problem, so does 3.0.2 - check [http://code.google.com/p/virtual-box-windows-guest-additions-installer/issues/detail?id=18 Issue 18] -- VBoxService does not start.
+Therefore, the current installs contain the VBoxService.exe from 2.2.4 which still does work. Thus, 3.0.0-2 is "featured", again - and will be replaced by 3.0.2, soon.
 
 An installer for the 3.0.0 additions has just been created. 
 When installed in safe mode, the Direct3D dlls (d3d8.dll and d3d9.dll) in the system32 directory are replaced. VirtualBox then routes the D3D calls to the wine3d implementation which "converts" them to OpenGL, which is already supported in the guest->host setup.
