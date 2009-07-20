@@ -5,6 +5,9 @@
 
 Binary/Compiled version of the VirtualBox Guest Additions for Windows, Open Source Edition (OSE) version. Including installer.
 
+== 3.3.0-# ==
+Sorry for the version numbering mixup. The 3.3.0 downloads are 3.0.0, of course.
+Corrected since 3.0.0-3.
 
 = Details =
 
@@ -26,6 +29,7 @@ Some issues are still open:
  * Disallow installing when SUN xVM Guest Additions are (still) installed.
 
 Please uninstall any Guest Additions provided by SUN or InnoTek (PUEL/commercial).
+
 
 == VirtualBox 3.0.0 and Direct3D ==
 
