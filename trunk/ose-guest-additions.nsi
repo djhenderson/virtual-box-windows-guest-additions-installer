@@ -34,7 +34,7 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 3.3.0
-!define INSTALLER_BUILD 1
+!define INSTALLER_BUILD 2
 !define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
 
 Name "${NAME}"
