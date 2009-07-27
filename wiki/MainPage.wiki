@@ -39,12 +39,21 @@ Therefore, the current installs contain the VBoxService.exe from 2.2.4 which sti
 An installer for the 3.0.0 additions has just been created. 
 When installed in safe mode, the Direct3D dlls (d3d8.dll and d3d9.dll) in the system32 directory are replaced. VirtualBox then routes the D3D calls to the wine3d implementation which "converts" them to OpenGL, which is already supported in the guest->host setup.
 
-Alternative to the safe mode installation, it may be possible to use
-{{{
- takeown /f c:\windows\system32\d3d8.dll
- takeown /f c:\windows\system32\d3d9.dll
-}}}
-and copy the two dlls manually from the guest additions installation directory.
+=== Alternative to Safe Mode Installation ===
+_Thanks to Jérôme Poulin_
+
+I don't know if it has been talked before on the mailing list, but there's no need to have to force installation in safe mode.
+
+You can simply rename the following values while installing:
+`SourcePath`
+`ServicePackSourcePath`
+in
+`HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\`
+
+and warn the user that Windows could pop-up a warning during installation, to just cancel and accept and of course make sure there's no Windows CD in the drive, but in the case of additions installation, it should not happen.
+
+You should also make sure the files do not appear in `%windir%\system32\dllcache` and finally rename the files to replace and select them for deletion on reboot. Put the new files and undo the values renaming, reboot, all done!
+
 
 == Windows 7 rc ==
 For windows 7 rc, you need to install the graphics driver manually (2.2.2-0).
