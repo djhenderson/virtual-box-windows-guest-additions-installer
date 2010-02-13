@@ -21,7 +21,7 @@ Signature="$WINDOWS NT$"
 Provider=%SUN%
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer = 01/06/2010,3.1.2
+DriverVer = 02/13/2010,3.1.4
 
 [DestinationDirs]
 DefaultDestDir=11
