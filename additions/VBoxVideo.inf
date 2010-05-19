@@ -11,17 +11,13 @@
 ; VirtualBox OSE distribution. VirtualBox OSE is distributed in the
 ; hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
 ;
-; Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa
-; Clara, CA 95054 USA or visit http://www.sun.com if you need
-; additional information or have any questions.
-;
 
 [Version]
 Signature="$WINDOWS NT$"
 Provider=%SUN%
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer = 03/28/2010,3.1.6
+DriverVer = 05/19/2010,3.1.8
 
 [DestinationDirs]
 DefaultDestDir=11
