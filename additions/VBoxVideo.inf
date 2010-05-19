@@ -1,7 +1,7 @@
 ;
 ; VirtualBox Video miniport driver
 ;
-; Copyright (C) 2006-2007 Sun Microsystems, Inc.
+; Copyright (C) 2006-2007 Oracle Corporation
 ;
 ; This file is part of VirtualBox Open Source Edition (OSE), as
 ; available from http://www.virtualbox.org. This file is free software;
@@ -17,7 +17,7 @@ Signature="$WINDOWS NT$"
 Provider=%SUN%
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer = 05/19/2010,3.1.8
+DriverVer = 05/19/2010,3.2.0
 
 [DestinationDirs]
 DefaultDestDir=11
