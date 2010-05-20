@@ -18,6 +18,7 @@ Provider=%SUN%
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
 DriverVer = 05/19/2010,3.2.0
+CatalogFile=VBoxVideo.cat
 
 [DestinationDirs]
 DefaultDestDir=11
