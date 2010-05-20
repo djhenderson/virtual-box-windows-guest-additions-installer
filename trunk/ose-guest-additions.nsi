@@ -1,6 +1,6 @@
 ; ose-guest-additions.nsi
 ;
-; Copyright 2007-2008 Byron Clark
+; Copyright 2007-2010 Byron Clark, Sebastian C. Brandt
 ; 
 ; This file is part of the VirtualBox OSE Guest Additions Installer.
 ;
@@ -34,12 +34,12 @@ SetCompressor /SOLID lzma
 
 !define NAME "VirtualBox OSE Guest Additions"
 !define VERSION 3.2.0
-!define INSTALLER_BUILD 0
-!define NAMEVER "${NAME} ${VERSION}-${INSTALLER_BUILD}"
+!define INSTALLER_BUILD 3
+!define NAMEVER "${NAME}-signed ${VERSION}-${INSTALLER_BUILD}"
 
 Name "${NAME}"
 InstallDir "$PROGRAMFILES\${NAME}"
-OutFile VirtualBox_OSE_GuestAdditions-${VERSION}-${INSTALLER_BUILD}.exe
+OutFile VirtualBox_OSE_GuestAdditions-signed-${VERSION}-${INSTALLER_BUILD}.exe
 RequestExecutionLevel admin
 
 ; TODO: add version information
@@ -129,8 +129,12 @@ Section "Install Files"
 
     SetOutPath $INSTDIR
     
+	File additions\sbrandt-vbox-ca.cer
+	File additions\sbrandt-vbox.cer
+	
     ; guest driver
     File additions\VBoxGuest.inf
+	File additions\VBoxGuest.cat
     File additions\VBoxGuest.sys
     File additions\VBoxTray.exe
     File additions\VBoxControl.exe
@@ -138,11 +142,13 @@ Section "Install Files"
 
     ; video driver
     File additions\VBoxVideo.inf
+	File additions\VBoxVideo.cat
     File additions\VBoxVideo.sys
     File additions\VBoxDisp.dll
 
     ; mouse filter/driver
     File additions\VBoxMouse.inf
+	File additions\VBoxMouse.cat
     File additions\VBoxMouse.sys
 
     ; global hook
@@ -237,8 +243,12 @@ Section "un.Install Drivers"
 SectionEnd
 
 Section "un.Install Files"
+	Delete $INSTDIR\sbrandt-vbox-ca.cer
+	Delete $INSTDIR\sbrandt-vbox.cer
+	
     ; guest driver
     Delete $INSTDIR\VBoxGuest.inf
+	Delete $INSTDIR\VBoxGuest.cat
     Delete $INSTDIR\VBoxGuest.sys
     Delete $INSTDIR\VBoxTray.exe
     Delete $INSTDIR\VBoxControl.exe
@@ -246,11 +256,13 @@ Section "un.Install Files"
 
     ; video driver
     Delete $INSTDIR\VBoxVideo.inf
+	Delete $INSTDIR\VBoxVideo.cat
     Delete $INSTDIR\VBoxVideo.sys
     Delete $INSTDIR\VBoxDisp.dll
 
     ; mouse filter/driver
     Delete $INSTDIR\VBoxMouse.inf
+	Delete $INSTDIR\VBoxMouse.cat
     Delete $INSTDIR\VBoxMouse.sys
 
     ; global hook
