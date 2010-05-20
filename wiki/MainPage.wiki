@@ -64,9 +64,9 @@ and warn the user that Windows could pop-up a warning during installation, to ju
 You should also make sure the files do not appear in `%windir%\system32\dllcache` and finally rename the files to replace and select them for deletion on reboot. Put the new files and undo the values renaming, reboot, all done!
 
 
-== Windows 7 rc ==
-For windows 7 rc, you need to install the graphics driver manually (2.2.2-0).
-Update graphics driver, Search on computer, "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver.
+== Windows 7  ==
+For windows 7, you need to install the graphics driver manually.
+Device Manager, Update graphics driver, Search on computer, "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver.
 
 In seamless mode, the "gadgets" are shown on the host desktop, and can be moved around - alpha blending is missing, though.
 
@@ -76,9 +76,11 @@ I'm getting the impression that it is possible to install the drivers, but very 
 Updating the graphics driver:
 "Update graphics driver", "Search on computer", "Select from (a?) list of ...", "Disk", "C:\Program Files\VirtualBox OSE Guest Additions", VirtualBox graphics driver (current version).
 
+Updating some of the OpenGL dlls seem to work in safe mode, otherwise they are locked (Vista compatibility mode). VBoxService and VBoxTray.exe are not replaced in compat mode, but you can just kill the two processes and replace them manually via explorer (at least two dialog boxes, file replacing and UAC).
+
 
 == Compilation ==
-According to Frank Mehnert (Sun), it is possible to compile the additions only with
+According to Frank Mehnert (Sun/Oracle), it is possible to compile the additions only with
 kmk VBOX_ONLY_ADDITIONS=1
 Adding BUILD_TARGET=win even allows to compile the windows additions on a linux system, with MSC (Visual Studio) (+ Wine on Linux) installed. Sounds difficult.
 
