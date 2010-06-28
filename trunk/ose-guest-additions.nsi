@@ -33,7 +33,7 @@ SetCompressor /SOLID lzma
 !include "MUI.nsh"
 
 !define NAME "VirtualBox OSE Guest Additions"
-!define VERSION 3.2.4
+!define VERSION 3.2.6
 !define INSTALLER_BUILD 0
 !define NAMEVER "${NAME}-signed ${VERSION}-${INSTALLER_BUILD}"
 
