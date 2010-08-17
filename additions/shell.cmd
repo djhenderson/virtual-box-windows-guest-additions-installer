@@ -6,6 +6,8 @@ call "C:\Programme\Microsoft Visual Studio 8\Common7\Tools\vsvars32.bat"
 echo inf2cat /driver:. /os:2000,XP_X86,Vista_X86,7_X86
 echo signtool sign /v /s PrivateCertStore /n "Sebastian C. Brandt" /sha1 "4902ee3772f13145740b32c135e0ea872bcb6e38" /t http://timestamp.verisign.com/scripts/timestamp.dll vboxmouse.cat vboxvideo.cat vboxguest.cat
 echo signtool verify /pa /v /c vboxguest.cat VBoxGuest.inf
+echo signtool verify /pa /v /c vboxmouse.cat VBoxMouse.inf
+echo signtool verify /pa /v /c vboxvideo.cat VBoxVideo.inf
 
 cmd
 
