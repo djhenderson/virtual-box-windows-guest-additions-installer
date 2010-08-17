@@ -18,7 +18,7 @@ Signature="$Windows NT$"
 Class=Mouse
 CatalogFile=VBoxMouse.cat
 ClassGuid={4D36E96F-E325-11CE-BFC1-08002BE10318}
-DriverVer = 06/28/2010,3.2.6
+DriverVer = 08/13/2010,3.2.8
 
 [SourceDisksNames]
 1 = %VBoxMouse.MediaDesc%
