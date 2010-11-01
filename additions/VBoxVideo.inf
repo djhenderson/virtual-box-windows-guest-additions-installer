@@ -14,11 +14,11 @@
 
 [Version]
 Signature="$WINDOWS NT$"
-Provider=%SUN%
+Provider=%ORACLE%
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 CatalogFile=VBoxVideo.cat
 Class=Display
-DriverVer = 08/13/2010,3.2.8
+DriverVer = 11/01/2010,3.2.10
 
 [DestinationDirs]
 DefaultDestDir=11
@@ -26,7 +26,7 @@ VBoxVideo.Miniport = 12 ; drivers
 VBoxVideo.Display  = 11 ; system32
 
 [Manufacturer]
-%SUN%=Model
+%ORACLE%=Model
 
 [Model]
 %VBoxVideo.SvcDesc% = VBoxVideo, PCI\VEN_80EE&DEV_BEEF
@@ -84,6 +84,6 @@ REG_EXPAND_SZ = 0x00020000
 REG_BINARY = 0x00000001
 REG_DWORD = 0x00010001
 
-SUN = "Sun Microsystems, Inc."
+ORACLE = "Oracle Corporation"
 VBoxVideo.Disk = "VirtualBox Video Driver Disk"
 VBoxVideo.SvcDesc = "VirtualBox Graphics Adapter"
